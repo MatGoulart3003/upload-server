@@ -33,6 +33,7 @@
     "fastify": "^5.8.2",
     "fastify-type-provider-zod": "^6.1.0",
     "postgres": "^3.4.8",
+    "uuidv7": "^1.2.0",
     "zod": "^4.3.6"
   }
 }
