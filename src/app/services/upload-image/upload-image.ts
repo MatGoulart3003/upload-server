@@ -1,23 +1,13 @@
-import { db } from '@/infra/db'
-import { schema } from '@/infra/db/schemas'
 import { type Either, makeFailure, makeSuccess } from '@/shared/either'
-import { Readable } from 'node:stream'
-import z from 'zod'
-import { InvalidFileFormat } from './errors/invalid-file-format'
+import { schema } from '@/infra/db/schemas'
 import { uploadFileToStorage } from '@/infra/storage/upload-file-to-storage'
-
-const uploadImageInput = z.object({
-  fileName: z.string(),
-  contentType: z.string(),
-  contentStream: z.instanceof(Readable),
-})
-
-type UploadImageInput = z.input<typeof uploadImageInput>
-interface UploadOutput {
-  fileId: string
-  fileName: string
-  fileUrl: string
-}
+import { InvalidFileFormat } from '../errors/invalid-file-format'
+import {
+  uploadImageInput,
+  type UploadImageInput,
+  type UploadOutput,
+} from './types'
+import { db } from '@/infra/db'
 
 const allowedMimeTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp']
 

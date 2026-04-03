@@ -1,8 +1,7 @@
-import { uploadImage } from '@/app/services/upload-image'
-import { isSuccess, unwrapEither } from '@/shared/either'
-
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import z from 'zod'
+import { uploadImage } from '@/app/services/upload-image/upload-image'
+import { isSuccess, unwrapEither } from '@/shared/either'
 
 export const uploadImageRoute: FastifyPluginAsyncZod = async server => {
   server.post(
