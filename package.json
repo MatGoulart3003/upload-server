@@ -16,7 +16,8 @@
     "db:migrate:test": "dotenv -e .env.test -- drizzle-kit migrate",
     "pretest": "npm run db:migrate:test",
     "pretest:watch": "npm run db:migrate:test",
-    "biome:fix": "biome check --fix ."
+    "biome:fix": "biome check --fix .",
+    "build": "tsup-node"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.8",
@@ -42,6 +43,7 @@
     "fastify": "^5.8.2",
     "fastify-type-provider-zod": "^6.1.0",
     "postgres": "^3.4.8",
+    "tsup": "^8.5.1",
     "uuidv7": "^1.2.0",
     "zod": "^4.3.6"
   }
