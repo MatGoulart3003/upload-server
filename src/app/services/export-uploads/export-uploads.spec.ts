@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import * as upload from '@/infra/storage/upload-file-to-storage'
 import { isSuccess, unwrapEither } from '@/shared/either'
 import { makeUpload } from '@/test/factories/make-upload'
-import { exportUploads } from './types'
+import { exportUploads } from './export-uploads'
 
 describe('get uploads', async () => {
   const randomUUIDUrl = randomUUID()
