@@ -14,7 +14,10 @@ export function transformSwaggerSchema(data: TransformSwaggerSchemaData) {
       }
     }
 
-    const body = schema.body as { properties: Record<string, unknown>; required: string[] }
+    const body = schema.body as {
+      properties: Record<string, unknown>
+      required: string[]
+    }
 
     body.properties.file = {
       type: 'string',

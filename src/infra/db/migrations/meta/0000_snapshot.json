@@ -47,9 +47,7 @@
         "uploads_remote_key_unique": {
           "name": "uploads_remote_key_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "remote_key"
-          ]
+          "columns": ["remote_key"]
         }
       },
       "policies": {},

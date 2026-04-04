@@ -1,11 +1,11 @@
 import { randomUUID } from 'node:crypto'
 import { Readable } from 'node:stream'
+import { eq } from 'drizzle-orm'
 import { beforeAll, describe, expect, it, vi } from 'vitest'
-import { isFailure, isSuccess, unwrapEither } from '@/shared/either'
 
 import { db } from '@/infra/db'
 import { schema } from '@/infra/db/schemas'
-import { eq } from 'drizzle-orm'
+import { isFailure, isSuccess, unwrapEither } from '@/shared/either'
 import { InvalidFileFormat } from '../errors/invalid-file-format'
 import { uploadImage } from './upload-image'
 

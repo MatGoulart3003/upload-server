@@ -15,7 +15,8 @@
     "db:studio": "drizzle-kit studio",
     "db:migrate:test": "dotenv -e .env.test -- drizzle-kit migrate",
     "pretest": "npm run db:migrate:test",
-    "pretest:watch": "npm run db:migrate:test"
+    "pretest:watch": "npm run db:migrate:test",
+    "biome:fix": "biome check --fix ."
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.8",

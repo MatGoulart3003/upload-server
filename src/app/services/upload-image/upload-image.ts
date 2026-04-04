@@ -1,13 +1,13 @@
-import { type Either, makeFailure, makeSuccess } from '@/shared/either'
+import { db } from '@/infra/db'
 import { schema } from '@/infra/db/schemas'
 import { uploadFileToStorage } from '@/infra/storage/upload-file-to-storage'
+import { type Either, makeFailure, makeSuccess } from '@/shared/either'
 import { InvalidFileFormat } from '../errors/invalid-file-format'
 import {
-  uploadImageInput,
   type UploadImageInput,
   type UploadOutput,
+  uploadImageInput,
 } from './types'
-import { db } from '@/infra/db'
 
 const allowedMimeTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp']
 

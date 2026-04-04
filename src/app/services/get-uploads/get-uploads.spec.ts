@@ -1,10 +1,10 @@
-import { getUploads } from './get-uploads'
 import { randomUUID } from 'node:crypto'
-import { describe, expect, it } from 'vitest'
-import { makeUpload } from '@/test/factories/make-upload'
-import { isSuccess, unwrapEither } from '@/shared/either'
-import { SortBy, SortDirection } from './types'
 import dayjs from 'dayjs'
+import { describe, expect, it } from 'vitest'
+import { isSuccess, unwrapEither } from '@/shared/either'
+import { makeUpload } from '@/test/factories/make-upload'
+import { getUploads } from './get-uploads'
+import { SortBy, SortDirection } from './types'
 
 describe('get uploads', async () => {
   it('should fetch uploads successfully', async () => {

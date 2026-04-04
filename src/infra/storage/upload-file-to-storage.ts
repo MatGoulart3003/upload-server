@@ -1,9 +1,9 @@
 import { Readable } from 'node:stream'
-import { z } from 'zod'
-import { r2 } from './client'
 import { Upload } from '@aws-sdk/lib-storage'
+import { z } from 'zod'
 import { env } from '@/env'
 import { generateUniqueFileName } from '@/utils/generateUniqueFileName'
+import { r2 } from './client'
 
 const uploadFileToStorageInput = z.object({
   folder: z.enum(['images', 'downloads']),

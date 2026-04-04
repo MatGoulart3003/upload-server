@@ -3,9 +3,9 @@ import { db } from '@/infra/db'
 import { schema } from '@/infra/db/schemas'
 import { type Either, makeSuccess } from '@/shared/either'
 import {
-  getUploadsInput,
   type GetUploadsInput,
   type GetUploadsOutput,
+  getUploadsInput,
   type Upload,
 } from './types'
 
