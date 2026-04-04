@@ -1,6 +1,8 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import z from 'zod'
+import { InvalidFileFormat } from '@/app/services/errors/invalid-file-format'
 import { uploadImage } from '@/app/services/upload-image/upload-image'
+import { MAX_FILE_SIZE } from '@/shared/constants'
 import { isSuccess, unwrapEither } from '@/shared/either'
 
 export const uploadImageRoute: FastifyPluginAsyncZod = async server => {
@@ -27,7 +29,7 @@ export const uploadImageRoute: FastifyPluginAsyncZod = async server => {
     async (request, reply) => {
       const uploadedFile = await request.file({
         limits: {
-          fileSize: 1024 * 1024 * 2,
+          fileSize: MAX_FILE_SIZE,
         },
       })
 
@@ -42,8 +44,6 @@ export const uploadImageRoute: FastifyPluginAsyncZod = async server => {
       })
 
       if (isSuccess(result)) {
-        console.log(unwrapEither(result))
-
         return reply.status(201).send({
           uploadId: result.success.fileId,
           fileName: result.success.fileName,
@@ -53,9 +53,8 @@ export const uploadImageRoute: FastifyPluginAsyncZod = async server => {
 
       const error = unwrapEither(result)
 
-      switch (error.constructor.name) {
-        case 'InvalidFileFormat':
-          return reply.status(400).send({ message: error.message })
+      if (error instanceof InvalidFileFormat) {
+        return reply.status(400).send({ message: error.message })
       }
     },
   )

@@ -5,6 +5,7 @@ import { ilike } from 'drizzle-orm'
 import { db, pg } from '@/infra/db'
 import { schema } from '@/infra/db/schemas'
 import { uploadFileToStorage } from '@/infra/storage/upload-file-to-storage'
+import { CSV_CONTENT_TYPE, STORAGE_FOLDERS } from '@/shared/constants'
 import { type Either, makeSuccess } from '@/shared/either'
 import {
   type ExportUploadsInput,
@@ -17,7 +18,6 @@ const handleTransformCsvChunk = () => {
     objectMode: true,
     transform(chunks: unknown[], _encoding, callback) {
       for (const chunk of chunks) {
-        console.log({ chunk })
         this.push(chunk)
       }
       callback()
@@ -67,9 +67,9 @@ export async function exportUploads(
 
   const uploadToStorage = uploadFileToStorage({
     contentStream: uploadToStorageStream,
-    folder: 'downloads',
+    folder: STORAGE_FOLDERS.DOWNLOADS,
     fileName: `uploads-report-${new Date().toISOString()}.csv`,
-    contentType: 'text/csv',
+    contentType: CSV_CONTENT_TYPE,
   })
 
   const [{ url }] = await Promise.all([uploadToStorage, convertPipelineToCSV])
