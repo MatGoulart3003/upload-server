@@ -1,18 +1,11 @@
-import { Readable } from 'node:stream'
 import { Upload } from '@aws-sdk/lib-storage'
-import { z } from 'zod'
 import { env } from '@/env'
 import { generateUniqueFileName } from '@/utils/generateUniqueFileName'
+import {
+  type UploadFileToStorageInput,
+  uploadFileToStorageInput,
+} from './types'
 import { r2 } from './client'
-
-const uploadFileToStorageInput = z.object({
-  folder: z.enum(['images', 'downloads']),
-  fileName: z.string(),
-  contentType: z.string(),
-  contentStream: z.instanceof(Readable),
-})
-
-type UploadFileToStorageInput = z.input<typeof uploadFileToStorageInput>
 
 export async function uploadFileToStorage(input: UploadFileToStorageInput) {
   const { folder, fileName, contentStream, contentType } =

@@ -1,6 +1,7 @@
 import { db } from '@/infra/db'
 import { schema } from '@/infra/db/schemas'
 import { uploadFileToStorage } from '@/infra/storage/upload-file-to-storage'
+import { ALLOWED_MIME_TYPES, STORAGE_FOLDERS } from '@/shared/constants'
 import { type Either, makeFailure, makeSuccess } from '@/shared/either'
 import { InvalidFileFormat } from '../errors/invalid-file-format'
 import {
@@ -9,14 +10,12 @@ import {
   uploadImageInput,
 } from './types'
 
-const allowedMimeTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp']
-
 export async function uploadImage(
   input: UploadImageInput,
 ): Promise<Either<InvalidFileFormat, UploadOutput>> {
   const { contentStream, contentType, fileName } = uploadImageInput.parse(input)
 
-  if (!allowedMimeTypes.includes(contentType)) {
+  if (!ALLOWED_MIME_TYPES.includes(contentType as (typeof ALLOWED_MIME_TYPES)[number])) {
     return makeFailure(new InvalidFileFormat())
   }
 
@@ -24,7 +23,7 @@ export async function uploadImage(
     fileName,
     contentType,
     contentStream,
-    folder: 'images',
+    folder: STORAGE_FOLDERS.IMAGES,
   })
 
   const [upload] = await db
